@@ -18,3 +18,9 @@ def success_response(data, code=200):
 
 def failure_response(message, code=404):
     return json.dumps({"error": message}), code
+
+# Get all events
+@app.route("/api/events/")
+def get_events(): 
+    events = [e.serialize() for e in Event.query.all()]
+    return success_response({"courses": events})
